@@ -8,7 +8,7 @@ from settings import MOVE_SPEED, MOVE_EXTRA_SPEED, WIDTH, HEIGHT, COLOR, JUMP_PO
 
 
 class Player(sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x: int, y: int):
         # sprite.Sprite.__init__(self)
         super().__init__()
         # швидкість переміщення: 0 – стояти на місці
@@ -135,7 +135,7 @@ class Player(sprite.Sprite):
         self.rect.x += self.x_val
         self.collide(self.x_val, 0, platforms)
 
-    def collide(self, x_val, y_val, platforms):
+    def collide(self, x_val: int, y_val: int, platforms):
         for platform in platforms:
             # Якщо є перетин платформи з гравцем
             if sprite.collide_rect(self, platform):
@@ -173,7 +173,7 @@ class Player(sprite.Sprite):
                         # і енергія стрибка зникає
                         self.y_val = 0
 
-    def teleporting(self, go_x, go_y):
+    def teleporting(self, go_x: int, go_y: int):
         self.rect.x = go_x
         self.rect.y = go_y
 
