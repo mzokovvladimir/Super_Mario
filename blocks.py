@@ -5,7 +5,7 @@ from settings import PLATFORM_WIDTH, PLATFORM_HEIGHT, PLATFORM_COLOR, ANIMATION_
 
 
 class Platform(sprite.Sprite):
-    def __init__(self, x, y):
+    def __init__(self, x: int, y: int):
         # sprite.Sprite.__init__(self)
         super().__init__()
         self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
@@ -16,14 +16,14 @@ class Platform(sprite.Sprite):
 
 
 class BlockDie(Platform):
-    def __init__(self, x, y):
-        Platform.__init__(self, x, y)
-        self.image = image.load(PATH_BLOCK_DIE)
+    def __init__(self, x: int, y: int):
+        Platform.__init__(self, x: int, y: int)
+        self.image = image.load(PATH_BLOCK_DIE: str)
 
 
 class BlockTeleport(Platform):
-    def __init__(self, x, y, go_x, go_y):
-        Platform.__init__(self, x, y)
+    def __init__(self, x: int, y: int, go_x: int, go_y: int):
+        Platform.__init__(self, x: int, y: int)
         # координати призначені для переміщення
         self.go_x = go_x
         self.go_y = go_y
@@ -40,9 +40,9 @@ class BlockTeleport(Platform):
 
 
 class Princess(Platform):
-    def __init__(self, x, y):
-        # Platform.__init__(self, x, y)
-        super().__init__(x, y)
+    def __init__(self, x: int, y: int):
+        # Platform.__init__(self, x: int, y: int)
+        super().__init__(x: int, y: int)
         """bolt_anim = []
         for anim in ANIMATION_PRINCESS:
             bolt_anim.append((anim, 0.8))
