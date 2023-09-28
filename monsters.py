@@ -4,7 +4,7 @@ from settings import MONSTER_WIDTH, MONSTER_HEIGHT, MONSTER_COLOR, ANIMATION_MON
 
 
 class Monster(sprite.Sprite):
-    def __init__(self, x, y, left, up, max_length_left, max_length_up):
+    def __init__(self, x: int, y: int, left: int, up: int, max_length_left: int, max_length_up: int):
         # sprite.Sprite.__init__(self)
         super().__init__()
         self.image = Surface((MONSTER_WIDTH, MONSTER_HEIGHT))
@@ -28,7 +28,7 @@ class Monster(sprite.Sprite):
         self.bolt_anim = pyganim.PygAnimation([(anim, 0.3) for anim in ANIMATION_MONSTER_HORIZONTAL])
         self.bolt_anim.play()
 
-    def update(self, platforms):
+    def update(self, platforms: list):
         self.image.fill(Color(MONSTER_COLOR))
         self.bolt_anim.blit(self.image, SCREEN_START)
 
@@ -44,7 +44,7 @@ class Monster(sprite.Sprite):
             # якщо пройшли максимальну відстань, то ідеї у зворотний бік, вертикаль
             self.y_val = - self.y_val
 
-    def collide(self, platforms):
+    def collide(self, platforms: list):
         for platform in platforms:
             # якщо з чимось чи кимось зіткнулися
             if sprite.collide_rect(self, platform) and self != platform:
