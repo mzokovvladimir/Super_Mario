@@ -6,29 +6,29 @@ from settings import WIN_WIDTH, WIN_HEIGHT, DISPLAY, BACKGROUND_COLOR, FILE_PATH
 
 
 class Camera:
-    def __init__(self, camera_fn, width, height):
+    def __init__(self, camera_fn, width: int, height: int):
         self.camera_fn = camera_fn
         self.state = Rect(0, 0, width, height)
 
-    def apply(self, target):
+    def apply(self, target: entity):
         return target.rect.move(self.state.topleft)
 
-    def update(self, target):
+    def update(self, target: entity):
         self.state = self.camera_fn(self.state, target.rect)
 
 
-def camera_configure(camera, target_rect):
+def camera_configure(camera, target_rect) -> Rect[l: int, t: int, w: int, h: int]:
     l, t, _, _ = target_rect
     _, _, w, h = camera
     l, t = - l + WIN_WIDTH / 2, - t + WIN_HEIGHT / 2
     # Не рухаємось далі лівого кордону
-    l = min(0, l)
+    l: int = min(0, l)
     # Не рухаємося далі за правий кордон
-    l = max(-(camera.width - WIN_WIDTH), l)
+    l: int = max(-(camera.width - WIN_WIDTH), l)
     # Не рухаємося далі за нижню межу
-    t = max(-(camera.height - WIN_HEIGHT), t)
+    t: int = max(-(camera.height - WIN_HEIGHT), t)
     # Не рухаємося далі за верхню межу
-    t = min(0, t)
+    t: int = min(0, t)
 
     return Rect(l, t, w, h)
 
@@ -37,7 +37,7 @@ def load_level():
     # оголошуємо глобальні змінні, це координати героя
     global player_x, player_y
     level_file = open(FILE_PATH)
-    line = " "
+    line: str = " "
     # commands = []
     # поки не знайшли символ завершення файлу
     while line[0] != "/":
@@ -120,7 +120,7 @@ def main():
         # Кожний символ
         for col in row:
             if col == "-":
-                pf = Platform(x, y)
+                pf: Platform = Platform(x, y)
                 entities.add(pf)
                 platforms.append(pf)
             if col == "*":
@@ -140,7 +140,7 @@ def main():
     total_level_width = len(level[0]) * PLATFORM_WIDTH  # Высчитываем фактическую ширину уровня
     total_level_height = len(level) * PLATFORM_HEIGHT  # высоту
 
-    camera = Camera(camera_configure, total_level_width, total_level_height)
+    camera: Camera = Camera(camera_configure, total_level_width, total_level_height)
     # Основний цикл програми
     while not hero.winner:
         # Оброблюємо події
@@ -186,9 +186,9 @@ def main():
         pygame.display.update()
 
 
-level = []
+level: list = []
 # те, у що ми врізатимемося або спиратимемося
-platforms = []
+platforms: list = []
 # Всі об'єкти
 entities = pygame.sprite.Group()
 # Всі анімовані об'єкти, за винятком героя
